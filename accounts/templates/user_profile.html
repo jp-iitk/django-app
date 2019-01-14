@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+{% endblock %}
+
+
+{% block title %}
+{{user.username}}-Profile
+{% endblock %}
+
+{% block content %}
+<div class="content-section">
+    <div class="media">
+        <img src="{{ user.userprofile.profile_pic.url }}" class="rounded-circle account-img">
+        <div class="media-body">
+            <h2 class="account-heading">{{user.username}}</h2>
+            <p class="text-secondary">{{user.email}}</p>
+        </div>
+    </div>
+    <form method="POST" enctype="multipart/form-data" novalidate>
+            {% csrf_token %}
+                {% include 'includes/form.html' %}
+            {% with profile_form as form %}
+                {% include 'includes/form.html' %}
+            {% endwith %}
+            <button class="btn btn-success">Update</button>
+        </form>
+</div>
+{% endblock %}

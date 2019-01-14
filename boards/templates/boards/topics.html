@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize emoticons_tags  %}
+<!--{% load emoticons_tags  %}-->
+{% block stylesheet %}
+<link href="{% static 'css/list_item.css' %}" rel="stylesheet">
+{% endblock %}
+{% block title %}
+{{ board.name }} - {{ block.super }}
+{% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'home' %}">Boards</a></li>
+<li class="breadcrumb-item active">{{ board.name }}</li>
+{% endblock %}
+
+{% block content %}
+<div class="mb-4">
+    <a href="{% url 'new_topic' board.pk %}" class="btn btn-primary">New topic</a>
+</div>
+{% include 'includes/pagination.html' %}
+{% for topic in topics %}
+<div class="card my-3">
+    <div class="card-body p-3">
+        <div class="row">
+            <div class="col align-self-center">
+                <img src="{{ topic.starter.userprofile.profile_pic.url }}" class="rounded-circle account-img">
+                <br>
+                <a href="{% url 'topic_posts' board.pk topic.pk %}">{{ topic.subject }}</a>
+                <small class="text-muted d-block">Hello how are you</small>
+            </div>
+            <div class="col align-self-center">
+                <small class="text-muted">
+                    <em>started by : &nbsp; </em>
+                </small>
+                {{ topic.starter.username }}
+            </div>
+            <div class="col-1 align-self-center">
+                {{topic.replies}}
+                <small class="text-muted">
+                    <em>&nbsp;Replies</em>
+                </small>
+            </div>
+            <div class="col-1 align-self-center">
+                {{topic.views}}
+                <small class="text-muted">
+                    <em>&nbsp;Views</em>
+                </small>
+            </div>
+            <div class="col">
+                <small class="text-muted">
+                    <em>last updated&nbsp;</em>
+                </small>
+                {{ topic.last_updated|naturaltime }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% include 'includes/pagination.html' %}
+{% endblock %}

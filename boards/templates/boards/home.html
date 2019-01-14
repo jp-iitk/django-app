@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'css/list_item.css' %}">
+{% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item active">Boards</li>
+{% endblock %}
+
+{% block content %}
+    {% for board in boards %}
+    <div class="card my-3">
+        <div class="card-body p-3">
+            <div class="row">
+                <div class="col-4">
+                    <img src="{{ user.userprofile.profile_pic.url }}" class="rounded-circle account-img">
+                    <br>
+                    <a href="{% url 'board_topics' board.pk %}">{{ board.name }}</a>
+                    <small class="text-muted d-block">{{ board.description }}</small>
+                </div>
+                <div class="col-2 align-self-center">
+                    {{ board.get_posts_count }}
+                    <small class="text-muted">
+                        <em>posts</em>
+                    </small>
+                </div>
+                <div class="col-2 align-self-center">
+                    {{ board.topics.count }}
+                    <small class="text-muted">
+                        <em>topics</em>
+                    </small>
+                </div>
+                <div class="col-4">
+                    <small class="text-muted">
+                        <em>Latest Post : </em>
+                    </small>
+                    {% with post=board.get_last_post %}
+                    {% if post %}
+                    <small>
+                        <a href="{% url 'topic_posts' board.pk post.topic.pk %}">
+                            By <span class="ml-1 mr-1"> {{ post.created_by.username }} </span> at <span
+                                class="ml-1 mr-1">  {{ post.created_at|naturaltime}} </span>
+                        </a>
+                    </small>
+                    {% else %}
+                    <small class="text-muted">
+                        <em>No posts yet.</em>
+                    </small>
+                    {% endif %}
+                    {% endwith %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}
