@@ -2,6 +2,8 @@ body{
 font-family: 'Roboto', sans-serif;
 }
 
+
+
 .content-section {
   background: #ffffff;
   padding: 10px 20px;
@@ -10,9 +12,16 @@ font-family: 'Roboto', sans-serif;
   margin-bottom: 20px;
 }
 
+.profile-img {
+  height: 50;
+  width: 50;
+  margin-right: 5px;
+  margin-bottom: 16px;
+}
+
 .account-img {
-  height: 125px;
-  width: 125px;
+  height: 100;
+  width: 100;
   margin-right: 20px;
   margin-bottom: 16px;
 }
@@ -20,3 +29,4 @@ font-family: 'Roboto', sans-serif;
 .account-heading {
   font-size: 3.5rem;
 }
+

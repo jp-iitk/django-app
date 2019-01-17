@@ -14,14 +14,14 @@
 <body>
 {% block body %}
 <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg bg-light navbar-light">
         <button aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation"
                 class="navbar-toggler"
                 data-target="#navbarTogglerDemo01" data-toggle="collapse" type="button">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <a class="navbar-brand" href="{% url 'home' %}">Discussion</a>
+            <a class="navbar-brand" href="{% url 'home' %}">Quantum QA</a>
             <button aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
                     data-target="#mainMenu" data-toggle="collapse" type="button">
                 <span class="navbar-toggler-icon"></span>
@@ -29,21 +29,22 @@
 
             <div class="collapse navbar-collapse" id="mainMenu">
                 {% if user.is_authenticated %}
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item dropdown">
-                        <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle"
-                           data-toggle="dropdown"
-                           href="#" id="userMenu">
-                            {{ user.username }}
-                        </a>
+                <li class="navbar-nav ml-auto">
+                    <img a class="rounded-circle profile-img" src="{{ user.userprofile.profile_pic.url }}">
+                    <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle account_dropdown"
+                       data-toggle="dropdown"
+                       href="#" id="userMenu">
+                        {{ user.username }}
+                    </a>
+                    <ul class="nav-item dropdown">
                         <div aria-labelledby="userMenu" class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="{% url 'user_profile' %}">My account</a>
                             <a class="dropdown-item" href="{% url 'password_change' %}">Change password</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{% url 'logout' %}">Log out</a>
                         </div>
-                    </li>
-                </ul>
+                    </ul>
+                </li>
                 {% else %}
                 <form class="form-inline ml-auto">
                     <a class="btn btn-outline-secondary" href="{% url 'login' %}">Log in</a>

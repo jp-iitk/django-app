@@ -40,7 +40,7 @@
                     {% if post %}
                     <small>
                         <a href="{% url 'topic_posts' board.pk post.topic.pk %}">
-                            By <span class="ml-1 mr-1"> {{ post.created_by.username }} </span> at <span
+                            <span class="ml-1 mr-1"> {{ post.created_by.username }} </span><span
                                 class="ml-1 mr-1">  {{ post.created_at|naturaltime}} </span>
                         </a>
                     </small>
@@ -56,3 +56,5 @@
     </div>
     {% endfor %}
 {% endblock %}
+
+
